@@ -1,0 +1,23 @@
+# 复制为 local.properties 后填写。该文件已在 .gitignore 中。
+#
+# 留空时构建仍然通过，但地图和语音对话功能不可用。
+
+# Android SDK 位置
+sdk.dir=C:/Android/sdk
+
+# 高德开放平台申请的 Android Key。
+# 申请时填写的「包名 + 签名 SHA1」与本工程保持一致：
+#     包名   com.navi.shell（可以改成自己的，改完按新包名重新申请 key）
+#     签名   keystore/release.jks 的 SHA1
+# 两者不一致时地图为空白、定位停留在「正在定位…」，logcat 中有 key 校验失败记录。
+# 查看自己证书的 SHA1：
+#     keytool -list -v -keystore keystore/release.jks | findstr SHA1
+amap.key=
+
+# 后端服务地址，http 和 https 均可，结尾不带斜杠。
+# 本工程调用的接口见 README 的「后端接口」一节。
+app.base.url=
+
+# 换取会话凭证用的授权串，服务端无鉴权时留空。
+# 换取到的是一个 gate_auth cookie，后续请求会带上它。
+app.auth.token=

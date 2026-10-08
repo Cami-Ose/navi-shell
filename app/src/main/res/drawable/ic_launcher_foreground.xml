@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  应用图标（占位）。
+
+  自适应图标画布是 108×108，中间 66×66 是各启动器一定保留的区域，
+  图形放在这范围内就不会被裁掉。
+
+  要换成自己的图标时，直接替换这个文件即可（保持文件名和 108×108 画布）。
+-->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M54,32 L74,76 L54,64 L34,76 Z" />
+</vector>

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+
+    <!-- 定位：导航要一直知道车在哪 -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
+
+    <!-- 导航中要在后台活着（切走、锁屏也继续报转向） -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_LOCATION" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+
+    <!-- 跟它说话 -->
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+
+    <uses-permission android:name="android.permission.VIBRATE" />
+
+    <uses-feature
+        android:name="android.hardware.location.gps"
+        android:required="false" />
+
+    <application
+        android:allowBackup="false"
+        android:icon="@mipmap/ic_launcher"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.NaviShell">
+
+        <!-- 高德 Key -->
+        <meta-data
+            android:name="com.amap.api.v2.apikey"
+            android:value="${AMAP_KEY}" />
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:configChanges="orientation|screenSize|keyboardHidden|uiMode"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize"
+            android:theme="@style/Theme.NaviShell">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!--
+          ★ 高德那堆组件必须在这里手写声明。
+          我们引的 com.amap.api:navi-3dmap-location-search 是个 **jar**，不是 aar ——
+          jar 里没有 AndroidManifest.xml，所以清单合并（manifest merger）什么都没拿到。
+          不写这几行，高德定位起不来（logcat 会说 "Unable to start service ... APSService ... not found"），
+          run 起来就是一直「正在定位…」，地图也不会跟车走。
+          这些类的父类是从 SDK 里读出来的（Service / Activity），不是猜的。
+        -->
+        <service
+            android:name="com.amap.api.location.APSService"
+            android:exported="false" />
+
+        <activity
+            android:name="com.amap.api.navi.AmapRouteActivity"
+            android:exported="false"
+            android:launchMode="singleTop"
+            android:theme="@style/Theme.NaviShell" />
+        <activity
+            android:name="com.amap.api.navi.core.auth.RideAccountLoginActivity"
+            android:exported="false"
+            android:theme="@style/Theme.NaviShell" />
+        <activity
+            android:name="com.amap.api.navi.component.activity.JsBridgeActivity"
+            android:exported="false"
+            android:theme="@style/Theme.NaviShell" />
+        <activity
+            android:name="com.amap.api.maps.offlinemap.OfflineMapActivity"
+            android:exported="false"
+            android:theme="@style/Theme.NaviShell" />
+
+        <!-- 导航期间挂个「我还活着」的牌子，免得切走就被系统掐掉 -->
+        <service
+            android:name=".navi.NaviService"
+            android:exported="false"
+            android:foregroundServiceType="location" />
+    </application>
+
+</manifest>

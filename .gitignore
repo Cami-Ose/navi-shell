@@ -1,0 +1,25 @@
+# 签名证书和密码绝不能进仓库
+keystore/
+*.jks
+*.keystore
+PASSWORD.txt
+
+# Android / Gradle
+*.iml
+.gradle/
+local.properties
+.idea/
+.DS_Store
+build/
+captures/
+.externalNativeBuild/
+.cxx/
+*.apk
+*.aab
+.kotlin/
+
+# 预录播报的**音频本体**不进仓库（133 个文件、25 MB）。
+# ★ phrases.json（清单，6 KB 的纯文本）**要进** —— 单测拿它对词表，
+#   不进的话新克隆下来 `gradlew test` 直接红。
+app/src/main/assets/voice/*.wav
+app/src/main/assets/voice/*.mp3

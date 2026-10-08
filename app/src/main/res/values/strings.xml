@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--
+      应用名。
+      包名是 com.navi.shell —— 高德 key 绑的是「包名 + 签名 SHA1」，
+      改包名 key 就失效（地图空白、永远「正在定位…」）。名字和包名是两码事。
+    -->
+    <string name="app_name">navi-shell</string>
+
+    <!--
+      ★ 你的 AI 叫什么 —— **留空**。
+
+      留空时界面上不出现名字，只显示它说的话：
+        对话气泡：   「前方三百米有测速」
+        导航通知：   「正在给你看着路」
+
+      想让它有名字，就在这儿填（比如「小助手」），三处显示会一起变成
+        对话气泡：   「小助手 · 前方三百米有测速」
+        导航通知：   「小助手在给你看着路」
+        首次启动的隐私说明里也会带上它
+    -->
+    <string name="ai_name" translatable="false"></string>
+</resources>
